@@ -49,10 +49,41 @@ var inversiones_test = [
         "inversionOriginal": NumberDecimal("1423.12") 
     },
 ]
-//  db.inversiones.insert(inversiones_test);
-// db.getCollectionNames();
-// db.inversiones.find();
-// db.inversiones.find().forEach(printjson);
-// db.inversiones.find({inversionOriginal: NumberDecimal("41234.424")})
+ db.inversiones.insert(inversiones_test);
+db.getCollectionNames();
+db.inversiones.find();
+db.inversiones.find().forEach(printjson);
+db.inversiones.find({inversionOriginal: NumberDecimal("41234.424")})
 db.inversiones.find({"tipo": "Bono"}).forEach(printjson);
 db.inversiones.find({"tipo": "Accion", "cantidad": {$lt:50}}).forEach(printjson);
+
+var asesores = [
+        {
+            "Nombre": "Jhon cruz",
+            "Factores de mercado": ["inseguridad","muchas ventas","bajas abruptas"],
+            "Recomendacion": "vender bonos", 
+            "Actibo": "Bonos"
+        },
+        {
+            "Nombre": "Martin juan ramires",
+            "Factores de mercado": ["inseguridad","posibles subas"],
+            "Recomendacion": "Comprar moderadamene", 
+            "Activo": "letras",
+            "Accion": [
+                {
+                    "tipo": "Accion",
+                    "fdc": new Date(2010,6,16,0,0),
+                    "cantidad": 11,
+                    "inversionOriginal": NumberDecimal("230.76") 
+                }
+            ]
+        },
+        {
+            "Nombre": "Walter White",
+            "Factores de mercado": ["97% de pureza en las predicciones"],
+            "Recomendacion": "Comprar acciones", 
+            "Activo": "Acciones"
+        }
+    ]
+db.asesores.insert(asesores)
+db.asesores.find().forEach(printjson)

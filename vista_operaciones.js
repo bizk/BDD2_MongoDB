@@ -14,13 +14,18 @@ var cantidad = db.inversiones.aggregate([
 ]);
 
 //db.inversiones.find();
-//db.inversiones.find().sort({precioActual:1}).forEach(printjson);
-db.inversiones.find(null,{nombre:1}).sort({precioActuak:-1});
-// db.getCollecion("inversiones").aggregate([
-//     {
-//         $group: {
-//             _id: null,
-//             maxQuantity: {$max: "$operaciones"}
-//         },
-//     }
-// ]);
+
+db.inversiones.aggregate([
+    //Creates a cuantification out of the arrays lenght
+    {"$project": {
+        nombre:1,
+        cantidadOperaciones: {"$size":"$operaciones"}
+    }},
+    //Sorts the created array
+    {$sort:{cantidadOperaciones: -1}},
+    //Project again 
+    {$project: {
+        nombre:1,
+        cantidadOperaciones:1,
+    }}
+])

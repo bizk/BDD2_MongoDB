@@ -3,7 +3,7 @@ connection + new Mongo();
 db = connection.getDB("test_01");
 
 //We use the agregate function to create a pipeline to run the different filters.
-db.inversiones.aggregate([
+var resultado = db.inversiones.aggregate([
     //Creates a cuantification out of the arrays lenght
     {
         "$project": {
@@ -32,4 +32,5 @@ db.inversiones.aggregate([
         $limit: 1
     }
 ]).pretty();
+printjson(resultado);
 //.pretty() returns json like strings.

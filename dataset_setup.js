@@ -1,5 +1,5 @@
-connection = new mongo();
-db = connection.getDB("test_01");
+// connection = new mongo();
+// db = connection.getDB("test_01");
 
 var inversiones_data = [{
         nombre: "YPF",
@@ -138,7 +138,7 @@ var inversiones_data = [{
                 futuro: "puede que la accion pierda valor.",
                 recomendacion: "Vender"
             },
-            {
+                        {
                 autor: "Roitman, Axel",
                 fecha: new Date(2019, 06, 08, 0, 0),
                 situacionActual: "La situacion actual es compleja deberiamos vender",

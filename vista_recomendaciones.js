@@ -15,6 +15,3 @@ db.inversiones.aggregate([
     { $project: { _id1:1, total: 1 } }, //Shows the resultss
     { $limit: 1 } //Limit the result
 ]);
-
-//alert("xd");
-    

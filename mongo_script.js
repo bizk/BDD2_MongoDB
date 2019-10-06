@@ -86,4 +86,4 @@ var asesores = [
         }
     ]
 db.asesores.insert(asesores)
-db.asesores.find().forEach(printjson)
+    db.asesores.find().forEach(printjson)

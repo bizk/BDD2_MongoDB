@@ -1,31 +1,35 @@
+//Here we create a connection with the database
 connection + new Mongo();
 db = connection.getDB("test_01");
 
-//db.inversiones.find().forEach(printjson);
-var cantidad = db.inversiones.aggregate([
-    {
-        $project: {
-            nombre: 1,
-            numberOfColors: { $cond: { 
-                if: { $isArray: "$operaciones" },
-                then: { $size: "$operaciones" }, else: "NA"} }
-        },
-    }
-]);
-
-//db.inversiones.find();
-
+//We use the agregate function to create a pipeline to run the different filters.
 db.inversiones.aggregate([
     //Creates a cuantification out of the arrays lenght
-    {"$project": {
-        nombre:1,
-        cantidadOperaciones: {"$size":"$operaciones"}
-    }},
+    {
+        "$project": {
+            nombre: 1,
+            cantidadOperaciones: {
+                "$size": "$operaciones"
+            }
+        }
+    },
     //Sorts the created array
-    {$sort:{cantidadOperaciones: -1}},
-    //Project again 
-    {$project: {
-        nombre:1,
-        cantidadOperaciones:1,
-    }}
-])
+    {
+        $sort: {
+            cantidadOperaciones: -1
+        }
+    },
+    //Project the result
+    {
+        $project: {
+            _id: 0, //This wont show the id
+            nombre: 1,
+            cantidadOperaciones: 1,
+        }
+    },
+    //We limit to one (THe one wuith the most operations)
+    {
+        $limit: 1
+    }
+]).pretty();
+//.pretty() returns json like strings.
